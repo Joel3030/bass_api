@@ -1,4 +1,4 @@
-.env
+git .env
 
 # compiled output
 /dist
