@@ -23,10 +23,10 @@ export class User {
   })
   status: boolean;
 
-  @Prop( {default: Date.now, rename: 'create_at' })
+  @Prop( {default: Date.now, $rename: 'create_at' })
   createAt: Date;
 
-  @Prop({ default: Date.now, rename: 'update_at' })
+  @Prop({ default: Date.now, $rename: 'update_at' })
   updateAt: Date;
 }
 

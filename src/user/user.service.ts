@@ -24,15 +24,14 @@ export class UserService {
     return user;
   }
 
-  async createUser(req: CreateUserDto): Promise<any> {
-    const userExist = await this.userModel.findOne({ username: req.userName });
+  async createUser(req: CreateUserDto): Promise<User> {
+    const userExist = await this.userModel.findOne({ userName: req.userName });
     if (userExist) throw new BadRequestException('User already registered');
 
     const newUser = new this.userModel(req);
     const user = await newUser.save();
-    console.log(user);
 
-    delete user.password;    
+    user.password = 'undefined';
     return user;
   }
 
@@ -45,8 +44,8 @@ export class UserService {
   }
 
   async deleteUser(id: string): Promise<User> {
-    const deletedUSer = await this.userModel.findByIdAndDelete(id);
-    if (!deletedUSer) throw new NotFoundException('User does not exist');
-    return deletedUSer;
+    const deletedUser = await this.userModel.findByIdAndDelete(id);
+    if (!deletedUser) throw new NotFoundException('User does not exist');
+    return deletedUser;
   }
 }
