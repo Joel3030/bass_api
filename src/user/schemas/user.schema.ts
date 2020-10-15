@@ -1,11 +1,13 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop()
+  @Prop({
+    name: 'username'
+  })
   userName: string;
 
   @Prop({
@@ -21,9 +23,11 @@ export class User {
   })
   status: boolean;
 
-  @Prop( {name: 'create_at' })
+  @Prop( {default: Date.now, rename: 'create_at' })
   createAt: Date;
 
-  @Prop({ default: Date.now, name: 'update_at' })
+  @Prop({ default: Date.now, rename: 'update_at' })
   updateAt: Date;
 }
+
+export const UserSchema = SchemaFactory.createForClass(User);
