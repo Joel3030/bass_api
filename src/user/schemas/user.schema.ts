@@ -5,10 +5,8 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop({
-    name: 'username'
-  })
-  userName: string;
+  @Prop({})
+  username: string;
 
   @Prop({
     select: false,
@@ -23,11 +21,11 @@ export class User {
   })
   status: boolean;
 
-  @Prop( {default: Date.now, $rename: 'create_at' })
-  createAt: Date;
+  @Prop({ default: Date.now })
+  create_at: Date;
 
-  @Prop({ default: Date.now, $rename: 'update_at' })
-  updateAt: Date;
+  @Prop({ default: Date.now })
+  update_at: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

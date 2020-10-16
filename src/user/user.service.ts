@@ -6,8 +6,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schemas/user.schema';
-import { CreateUserDto } from './dtos/create-user.dto';
-import { updateUserDto } from './dtos/update-user.dto';
+import { CreateUserDto, updateUserDto } from './dtos';
+import { hash } from 'bcrypt';
+import { ReadUserDto } from './dtos/read-user.dto';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -24,18 +26,24 @@ export class UserService {
     return user;
   }
 
-  async createUser(req: CreateUserDto): Promise<User> {
-    const userExist = await this.userModel.findOne({ userName: req.userName });
+  async createUser(req: Partial<CreateUserDto>): Promise<ReadUserDto> {
+    const userExist = await this.userModel.findOne({ username: req.username });
     if (userExist) throw new BadRequestException('User already registered');
 
-    const newUser = new this.userModel(req);
-    const user = await newUser.save();
+    req.password = await hash(req.password, 10);
 
-    user.password = 'undefined';
-    return user;
+    const newUser = new this.userModel(req);
+    const user: User = await newUser.save();
+
+    
+    
+    return plainToClass(ReadUserDto, user);
+   
   }
 
   async updateUser(id: string, req: updateUserDto): Promise<User> {
+    if (req.password) req.password = await hash(req.password, 10);
+
     const updatedUser = await this.userModel.findByIdAndUpdate(id, req, {
       new: true,
     });

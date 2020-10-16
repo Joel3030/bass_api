@@ -5,7 +5,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()  
   @MaxLength(25, {message: 'the username is too long'})
-  userName: string;
+  username: string;
 
   @IsNotEmpty()
   @IsString()

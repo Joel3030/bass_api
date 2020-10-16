@@ -1,10 +1,21 @@
-import { IsBoolean, IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
+import {
+  IsBoolean,
+  IsDate,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
-export class updateUserDto {
+@Exclude()
+export class ReadUserDto {
+  @IsString()
+  _is: string;
+
   @IsNotEmpty()
   @IsString()
-  @MaxLength(25, { message: 'username is too long' })  
+  @MaxLength(25, { message: 'username is too long' })
+  @Expose()
   username: string;
 
   @IsNotEmpty()
@@ -26,5 +37,4 @@ export class updateUserDto {
   @IsNotEmpty()
   @IsDate()
   update_at: Date;
-
 }
