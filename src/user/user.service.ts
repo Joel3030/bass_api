@@ -52,4 +52,9 @@ export class UserService {
     if (!deletedUser) throw new NotFoundException('User does not exist');
     return plainToClass(ReadUserDto, deletedUser);
   }
+
+  async findOne(username: string ){
+    const data = await this.userModel.findOne({username: username}).select('password');    
+    return data;
+  }
 }

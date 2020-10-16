@@ -23,6 +23,12 @@ export class UserController {
     return res.status(HttpStatus.OK).json(users);
   }
 
+  @Get('prueba')
+  async findone(@Res() res: Response): Promise<Response> {
+    const users = await this.userService.findOne('joel303266330322');
+    return res.status(HttpStatus.OK).json(users);
+  }
+
   @Get(':id')
   async getUser(
     @Res() res: Response,
@@ -64,4 +70,6 @@ export class UserController {
       .status(HttpStatus.OK)
       .json({ message: 'User Successfully Deleted', deletedUser });
   }
+
+
 }
