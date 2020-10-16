@@ -53,8 +53,8 @@ export class UserService {
     return plainToClass(ReadUserDto, deletedUser);
   }
 
-  async findOne(username: string ){
-    const data = await this.userModel.findOne({username: username}).select('password');    
+  async findOne(username: string ): Promise<User | undefined> {
+    const data = await this.userModel.findOne({username: username});    
     return data;
   }
 }
