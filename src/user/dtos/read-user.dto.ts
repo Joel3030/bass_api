@@ -9,32 +9,23 @@ import {
 
 @Exclude()
 export class ReadUserDto {
-  @IsString()
-  _is: string;
+  @Expose()
+  _id: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(25, { message: 'username is too long' })
   @Expose()
   username: string;
-
-  @IsNotEmpty()
-  @IsString()  
+  
   password: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @Expose()
   employee: any;
 
-  @IsNotEmpty()
-  @IsBoolean()
+  @Expose()
   status: boolean;
 
-  @IsNotEmpty()
-  @IsDate()
+  @Expose()
   create_at: Date;
 
-  @IsNotEmpty()
-  @IsDate()
+  @Expose()
   update_at: Date;
 }

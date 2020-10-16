@@ -6,24 +6,23 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schemas/user.schema';
-import { CreateUserDto, updateUserDto } from './dtos';
+import { CreateUserDto, UpdateUserDto, ReadUserDto } from './dtos';
 import { hash } from 'bcrypt';
-import { ReadUserDto } from './dtos/read-user.dto';
 import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async getUsers(): Promise<User[]> {
+  async getUsers(): Promise<ReadUserDto[]> {
     const users = await this.userModel.find();
-    return users;
+    return plainToClass(ReadUserDto, users);
   }
 
-  async getUser(id: string): Promise<User> {
+  async getUser(id: string): Promise<ReadUserDto> {
     const user = await this.userModel.findById(id);
     if (!user) throw new NotFoundException('User does not exist');
-    return user;
+    return plainToClass(ReadUserDto, user);
   }
 
   async createUser(req: Partial<CreateUserDto>): Promise<ReadUserDto> {
@@ -35,25 +34,22 @@ export class UserService {
     const newUser = new this.userModel(req);
     const user: User = await newUser.save();
 
-    
-    
     return plainToClass(ReadUserDto, user);
-   
   }
 
-  async updateUser(id: string, req: updateUserDto): Promise<User> {
+  async updateUser(id: string, req: UpdateUserDto): Promise<ReadUserDto> {
     if (req.password) req.password = await hash(req.password, 10);
 
     const updatedUser = await this.userModel.findByIdAndUpdate(id, req, {
       new: true,
     });
     if (!updatedUser) throw new NotFoundException('User does not exist');
-    return updatedUser;
+    return plainToClass(ReadUserDto, updatedUser);
   }
 
-  async deleteUser(id: string): Promise<User> {
+  async deleteUser(id: string): Promise<ReadUserDto> {
     const deletedUser = await this.userModel.findByIdAndDelete(id);
     if (!deletedUser) throw new NotFoundException('User does not exist');
-    return deletedUser;
+    return plainToClass(ReadUserDto, deletedUser);
   }
 }

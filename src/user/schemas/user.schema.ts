@@ -8,9 +8,7 @@ export class User {
   @Prop({})
   username: string;
 
-  @Prop({
-    select: false,
-  })
+  @Prop()
   password: string;
 
   @Prop() //type employee
