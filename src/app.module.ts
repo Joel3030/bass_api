@@ -7,6 +7,8 @@ import Configuration from './config/configuration';
 import { keys } from './config/constants';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { SetDefaultModule } from './set-default/set-default.module';
+import { SetDefaultService } from './set-default/set-default.service';
 
 @Module({
   imports: [
@@ -23,14 +25,20 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    SetDefaultModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
   static port: number | string;
+  static config: ConfigService;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly setDefaultService: SetDefaultService,
+  ) {
     AppModule.port = this.configService.get<string>(keys.PORT);
+    this.setDefaultService;
   }
 }
