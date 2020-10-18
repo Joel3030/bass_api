@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { User, DefaultUserDocument } from './schemas';
 import { ConfigService } from '@nestjs/config';
 import { keys } from '../config/constants';
-
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class SetDefaultService {
@@ -29,11 +29,11 @@ export class SetDefaultService {
         role: ['ADMIN'],
         status: true,
         create_at: null,
-        update_at: null
-
+        update_at: null,
       };
 
-      console.log(req.password);
+      req.password = await hash(req.password, 10);
+      
       const newDefaultUser = new this.defaultUserModel(req);
       return await newDefaultUser.save();
     }
