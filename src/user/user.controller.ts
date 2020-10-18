@@ -12,18 +12,29 @@ import {
 import { Response } from 'express';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dtos';
+import { Auth } from 'src/common/decorators';
+import { AppResource } from 'src/app.roles';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-
+  @Auth({
+    resource: AppResource.USER,
+    action: 'read',
+    possession: 'any',
+  })
   @Get()
   async getUsers(@Res() res: Response): Promise<Response> {
     const users = await this.userService.getUsers();
     return res.status(HttpStatus.OK).json(users);
   }
 
+  @Auth({
+    resource: AppResource.USER,
+    action: 'read',
+    possession: 'any',
+  })
   @Get(':id')
   async getUser(
     @Res() res: Response,
@@ -33,6 +44,12 @@ export class UserController {
     return res.status(HttpStatus.OK).json(user);
   }
 
+  @Auth({
+    resource: AppResource.USER,
+    action: 'create',
+    possession: 'any',
+  })
+  @Auth()
   @Post('create')
   async createUser(
     @Res() res: Response,
@@ -45,6 +62,11 @@ export class UserController {
     });
   }
 
+  @Auth({
+    resource: AppResource.USER,
+    action: 'update',
+    possession: 'any',
+  })
   @Put('update/:id')
   async updateUSer(
     @Res() res: Response,
@@ -58,6 +80,11 @@ export class UserController {
     });
   }
 
+  @Auth({
+    resource: AppResource.USER,
+    action: 'delete',
+    possession: 'any',
+  })
   @Delete('delete/:id')
   async deleteUser(@Res() res: Response, @Param('id') id: string) {
     const deletedUser = await this.userService.deleteUser(id);

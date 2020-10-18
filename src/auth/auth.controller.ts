@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   HttpStatus,
@@ -7,11 +6,13 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { User } from 'src/common/decorators/user.decorator';
+import { UserDecorator } from 'src/common/decorators';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard, JwtAuthGuard } from './guards';
-import { ReadUserDto } from '../user/dtos/read-user.dto';
+import { LocalAuthGuard } from './guards';
 import { Response } from 'express';
+import { ReadAuthDto } from './dtos/read-auth.dto';
+
+import { Auth } from '../common/decorators/auth.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +22,7 @@ export class AuthController {
   @Post('login')
   async login(
     @Res() res: Response,
-    @User() user: ReadUserDto,
+    @UserDecorator() user: ReadAuthDto,
   ): Promise<Response> {
     const data = await this.authService.login(user);
     return res.status(HttpStatus.OK).json({
@@ -30,12 +31,12 @@ export class AuthController {
     });
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get('profile')
   getProfile(
-    @User() user: ReadUserDto,
+    @UserDecorator() user: ReadAuthDto,
     @Res() res: Response,
-  ) {
+  ): Response {
     return res.status(HttpStatus.OK).json(user);
   }
 }

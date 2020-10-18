@@ -14,6 +14,9 @@ export class ReadAuthDto{
   employee: any;
 
   @Expose()
+  roles: string[];
+
+  @Expose()
   status: boolean;
 
   @Expose()

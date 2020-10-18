@@ -21,6 +21,9 @@ export class ReadUserDto {
   employee: any;
 
   @Expose()
+  roles: string[];
+
+  @Expose()
   status: boolean;
 
   @Expose()

@@ -9,6 +9,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SetDefaultModule } from './set-default/set-default.module';
 import { SetDefaultService } from './set-default/set-default.service';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { SetDefaultService } from './set-default/set-default.service';
         uri: configService.get<string>(keys.MONGODB_URI),
       }),
     }),
+    AccessControlModule.forRoles(roles),
     UserModule,
     AuthModule,
     SetDefaultModule,

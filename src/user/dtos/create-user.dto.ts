@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength,} from 'class-validator';
+import { IsArray, IsNotEmpty, IsString, MaxLength, MinLength,} from 'class-validator';
 
 export class CreateUserDto {
 
@@ -15,5 +15,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   employee: any 
+
+  @IsNotEmpty()
+  @IsArray()
+  roles: string[]; 
 
 }

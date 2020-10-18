@@ -26,7 +26,7 @@ export class SetDefaultService {
         username: this.configService.get<string>(keys.DEFAULT_USERNAME),
         password: this.configService.get<string>(keys.DEFAULT_PASSWORD),
         employee: null,
-        role: ['ADMIN'],
+        roles: ['ADMIN'],
         status: true,
         create_at: null,
         update_at: null,

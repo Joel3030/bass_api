@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsDate,
   IsNotEmpty,
@@ -19,6 +20,10 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsString()
   employee: any;
+
+  @IsNotEmpty()
+  @IsArray()
+  roles: string[];
 
   @IsNotEmpty()
   @IsBoolean()

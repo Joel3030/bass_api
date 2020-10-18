@@ -15,7 +15,7 @@ export class User {
   employee: any;
 
   @Prop([String]) 
-  role: string[];
+  roles: string[];
 
   @Prop({
     default: true,
