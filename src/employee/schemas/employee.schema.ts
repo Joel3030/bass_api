@@ -1,4 +1,4 @@
-import { Schema, Prop, raw } from '@nestjs/mongoose';
+import { Schema, Prop, raw, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type EmployeeDocument = Employee & Document;
@@ -44,3 +44,5 @@ export class Employee {
   @Prop({ default: Date.now })
   update_at: Date;
 }
+
+export const EmployeeSchema = SchemaFactory.createForClass(Employee);
