@@ -1,5 +1,5 @@
-
 import { Exclude, Expose, Type } from 'class-transformer';
+import { IsNotEmpty } from 'class-validator';
 
 @Exclude()
 export class ReadEmployeeDto {
@@ -7,6 +7,7 @@ export class ReadEmployeeDto {
   readonly _id: string;
 
   @Expose()
+  @IsNotEmpty()
   @Type(() => FullName)
   readonly fullname: FullName[];
 
@@ -32,6 +33,7 @@ export class ReadEmployeeDto {
 }
 
 class FullName {
+  @IsNotEmpty()
   name: string;
   lastname: string;
 }

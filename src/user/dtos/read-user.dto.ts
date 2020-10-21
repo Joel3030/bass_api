@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-
+import { Employee } from '../../employee/schemas/employee.schema';
 
 @Exclude()
 export class ReadUserDto {
@@ -8,11 +8,11 @@ export class ReadUserDto {
 
   @Expose()
   username: string;
-  
+
   password: string;
 
   @Expose()
-  employee: any;
+  employee: Employee;
 
   @Expose()
   roles: string[];

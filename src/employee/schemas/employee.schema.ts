@@ -7,8 +7,8 @@ export type EmployeeDocument = Employee & Document;
 export class Employee {
   @Prop(
     raw({
-      name: { type: String, required: true },
-      lastname: { type: String, required: true },
+      name: String,
+      lastname: String,
     }),
   )
   fullname: Record<string, any>;
@@ -18,19 +18,19 @@ export class Employee {
 
   @Prop(
     raw({
-      telephone: { type: String, required: true },
-      phone: { type: String, required: true },
-      email: { type: String, required: true },
+      telephone: String,
+      phone: String,
+      email: String,
     }),
   )
   contacts: Record<string, any>;
 
   @Prop(
     raw({
-      address: { type: String, required: true },
-      sector: { type: String, required: true },
-      municipio: { type: String, required: true },
-      zipcode: { type: Number, required: true },
+      address: String,
+      sector: String,
+      municipio: String,
+      zipcode: Number,
     }),
   )
   location: Record<string, any>;

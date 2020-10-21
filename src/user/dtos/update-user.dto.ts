@@ -6,6 +6,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
+import { Employee } from 'src/employee/schemas/employee.schema';
 
 export class UpdateUserDto {
   @IsNotEmpty()
@@ -19,7 +20,7 @@ export class UpdateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  employee: any;
+  employee: Employee;
 
   @IsNotEmpty()
   @IsArray()
