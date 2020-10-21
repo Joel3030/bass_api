@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as s } from 'mongoose';
+import { Employee } from 'src/employee/schemas/employee.schema';
 
 export type UserDocument = User & Document;
 
@@ -11,8 +12,12 @@ export class User {
   @Prop()
   password: string;
 
-  @Prop() //type employee
-  employee: any;
+  @Prop({
+    type: s.Types.ObjectId,
+    ref: Employee.name,
+    required: true
+  }) 
+  employee: Employee;
 
   @Prop([String]) 
   roles: string[];

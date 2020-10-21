@@ -14,7 +14,7 @@ export class Employee {
   fullname: Record<string, any>;
 
   @Prop()
-  idCard: string;
+  idcard: string;
 
   @Prop(
     raw({
@@ -30,13 +30,13 @@ export class Employee {
       address: { type: String, required: true },
       sector: { type: String, required: true },
       municipio: { type: String, required: true },
-      zipcode: { type: String, required: true },
+      zipcode: { type: Number, required: true },
     }),
   )
   location: Record<string, any>;
 
   @Prop({ default: true })
-  status: string;
+  status: boolean;
 
   @Prop({ default: Date.now })
   create_at: Date;

@@ -1,30 +1,49 @@
-export class updateEmployeeDto{
-    
-	fullName: {
-	  readonly name: string;
-	  readonly lastName: string;
-	};  
-	
-	readonly idCard: string;  
-	
-	contacts: {
-	  readonly telephone: string;
-	  readonly phone: string;
-	  readonly email: string;
-	};    
-	
-	readonly location: {
-	  address: string;
-	  sector: string;
-	  municipio: string;
-	  zipCode: number;
-	};  
-	
-    readonly status: boolean;
-    
-	create_at: Date;
+import { Exclude, Expose, Type } from 'class-transformer';
 
-    update_at: Date; 
+@Exclude()
+export class updateEmployeeDto {
+  @Expose()
+  _id: string;
 
-	
+  @Expose()
+  @Type(() => FullName)
+  fullname: FullName[];
+
+  @Expose()
+  idcard: string;
+
+  @Expose()
+  @Type(() => Contacts)
+  contacts: Contacts[];
+
+  @Expose()
+  @Type(() => Location)
+  location: Location[];
+
+  @Expose()
+  status: boolean;
+
+  @Expose()
+  create_at: Date;
+
+  @Expose()
+  update_at: Date;
+}
+
+class FullName {
+  name: string;
+  lastname: string;
+}
+
+class Contacts {
+  telephone: string;
+  phone: string;
+  email: string;
+}
+
+class Location {
+  address: string;
+  sector: string;
+  municipio: string;
+  zipcode: number;
 }

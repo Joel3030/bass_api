@@ -1,11 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import {
-  IsBoolean,
-  IsDate,
-  IsNotEmpty,
-  IsString,
-  MaxLength,
-} from 'class-validator';
+
 
 @Exclude()
 export class ReadUserDto {

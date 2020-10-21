@@ -2,10 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Employee, EmployeeDocument } from './schemas/employee.schema';
-import { CreateEmployeeDto } from './dtos/create-employee.dto';
-import { updateEmployeeDto } from './dtos/update-employee.dto';
-import { ReadEmployeeDto } from './dtos/read-employee.dto';
-import { plainToClass } from 'class-transformer';
+import { CreateEmployeeDto, updateEmployeeDto, ReadEmployeeDto } from './dtos';
+
+import { plainToClass, plainToClassFromExist } from 'class-transformer';
 
 @Injectable()
 export class EmployeeService {
@@ -24,18 +23,21 @@ export class EmployeeService {
     return plainToClass(ReadEmployeeDto, employee);
   }
 
-  async createEmployee(req: CreateEmployeeDto): Promise<ReadEmployeeDto> {
+  async createEmployee(req: Partial< CreateEmployeeDto>): Promise<ReadEmployeeDto> {
     const newEmployee = new this.employeeModel(req);
-    return plainToClass(ReadEmployeeDto, newEmployee);
+    const employee: Employee = await newEmployee.save();
+    return plainToClass(ReadEmployeeDto, employee);
   }
 
   async updateEmployee(
     id: string,
     req: updateEmployeeDto,
   ): Promise<ReadEmployeeDto> {
+    req.update_at = new Date();
+
     const updatedEmployee = await this.employeeModel.findByIdAndUpdate(
       id,
-      { set: req },
+      req,
       { new: true },
     );
     if (!updatedEmployee)

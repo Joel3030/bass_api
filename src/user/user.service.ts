@@ -25,7 +25,7 @@ export class UserService {
     return plainToClass(ReadUserDto, user);
   }
 
-  async createUser(req: Partial<CreateUserDto>): Promise<ReadUserDto> {
+  async createUser(req: CreateUserDto): Promise<ReadUserDto> {
     const userExist = await this.userModel.findOne({ username: req.username });
     if (userExist) throw new BadRequestException('User already registered');
 

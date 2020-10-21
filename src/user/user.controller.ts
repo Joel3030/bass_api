@@ -57,7 +57,7 @@ export class UserController {
   ): Promise<Response> {
     const newUser = await this.userService.createUser(req);
     return res.status(HttpStatus.OK).json({
-      messege: 'User Successfylly Created',
+      messege: 'User Created Successfylly',
       newUser,
     });
   }
@@ -75,7 +75,7 @@ export class UserController {
   ) {
     const updatedUSer = await this.userService.updateUser(id, req);
     return res.status(HttpStatus.OK).json({
-      message: 'User Successfully Updated',
+      message: 'User Updated Successfully',
       updatedUSer,
     });
   }
@@ -90,6 +90,6 @@ export class UserController {
     const deletedUser = await this.userService.deleteUser(id);
     return res
       .status(HttpStatus.OK)
-      .json({ message: 'User Successfully Deleted', deletedUser });
+      .json({ message: 'User Deleted Successfully ', deletedUser });
   }
 }

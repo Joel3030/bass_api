@@ -32,17 +32,20 @@ export class EmployeeController {
     const employee = await this.employeeService.getEmployee(id);
     return res.status(HttpStatus.OK).json(employee);
   }
+
   @Post('create')
   async createEmployee(
     @Res() res: Response,
     @Body() req: CreateEmployeeDto,
   ): Promise<Response> {
+    
     const newEmployee = await this.employeeService.createEmployee(req);
-    return res.status(HttpStatus.CREATED).json({
+    return res.status(HttpStatus.OK).json({
       message: 'Employee Created Successfully',
       newEmployee,
     });
   }
+
   @Put('update/:id')
   async updateEmployee(
     @Res() res: Response,
@@ -51,7 +54,7 @@ export class EmployeeController {
   ): Promise<Response> {
     const updatedEmployee = await this.employeeService.updateEmployee(id, req);
     return res.status(HttpStatus.OK).json({
-      message: 'Employee Created Successfully',
+      message: 'Employee Updated Successfully',
       updatedEmployee,
     });
   }
@@ -63,7 +66,7 @@ export class EmployeeController {
   ): Promise<Response> {
     const deletedEmployee = await this.employeeService.deleteEmployee(id);
     return res.status(HttpStatus.OK).json({
-      message: 'Employee Created Successfully',
+      message: 'Employee Deleted Successfully',
       deletedEmployee,
     });
   }
