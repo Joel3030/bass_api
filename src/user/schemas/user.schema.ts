@@ -15,11 +15,11 @@ export class User {
   @Prop({
     type: s.Types.ObjectId,
     ref: Employee.name,
-    required: true
-  }) 
+    required: true,
+  })
   employee: Employee;
 
-  @Prop([String]) 
+  @Prop([String])
   roles: string[];
 
   @Prop({

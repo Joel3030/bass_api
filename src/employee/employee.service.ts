@@ -23,7 +23,9 @@ export class EmployeeService {
     return plainToClass(ReadEmployeeDto, employee);
   }
 
-  async createEmployee(req: Partial< CreateEmployeeDto>): Promise<ReadEmployeeDto> {
+  async createEmployee(
+    req: Partial<CreateEmployeeDto>,
+  ): Promise<ReadEmployeeDto> {
     const newEmployee = new this.employeeModel(req);
     const employee: Employee = await newEmployee.save();
     return plainToClass(ReadEmployeeDto, employee);
@@ -37,7 +39,7 @@ export class EmployeeService {
 
     const updatedEmployee = await this.employeeModel.findByIdAndUpdate(
       id,
-      req,
+      { $set: req },
       { new: true },
     );
     if (!updatedEmployee)

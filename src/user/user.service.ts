@@ -15,12 +15,12 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async getUsers(): Promise<ReadUserDto[]> {
-    const users = await this.userModel.find();
+    const users = await this.userModel.find().populate('employee');
     return plainToClass(ReadUserDto, users);
   }
 
   async getUser(id: string): Promise<ReadUserDto> {
-    const user = await this.userModel.findById(id);
+    const user = await this.userModel.findById(id).populate('employee');
     if (!user) throw new NotFoundException('User does not exist');
     return plainToClass(ReadUserDto, user);
   }
@@ -53,8 +53,8 @@ export class UserService {
     return plainToClass(ReadUserDto, deletedUser);
   }
 
-  async findOne(username: string ): Promise<User | undefined> {
-    const data = await this.userModel.findOne({username: username});    
+  async findOne(username: string): Promise<User | undefined> {
+    const data = await this.userModel.findOne({ username: username });
     return data;
   }
 }
