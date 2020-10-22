@@ -14,6 +14,7 @@ import { roles } from './app.roles';
 import { EmployeeModule } from './employee/employee.module';
 import { ClientModule } from './client/client.module';
 import { SupplierModule } from './supplier/supplier.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { SupplierModule } from './supplier/supplier.module';
     EmployeeModule,
     ClientModule,
     SupplierModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],
