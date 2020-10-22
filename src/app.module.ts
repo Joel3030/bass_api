@@ -13,6 +13,7 @@ import { AccessControlModule } from 'nest-access-control';
 import { roles } from './app.roles';
 import { EmployeeModule } from './employee/employee.module';
 import { ClientModule } from './client/client.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ClientModule } from './client/client.module';
     SetDefaultModule,
     EmployeeModule,
     ClientModule,
+    SupplierModule,
   ],
   controllers: [AppController],
   providers: [AppService],
