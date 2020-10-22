@@ -58,7 +58,7 @@ export class SupplierService {
   }
 
   async getVentors(): Promise<ReadSellerDto[]> {
-    const ventors: Seller[] = await this.sellerModel.find();
+    const ventors: Seller[] = await this.sellerModel.find().populate('company');
     return plainToClass(ReadSellerDto, ventors);
   }
 
