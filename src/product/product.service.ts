@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Inventory, InventoryDocument } from './schemas';
@@ -23,6 +23,7 @@ export class ProductService {
 
   async getInventory(id: string): Promise<ReadInventoryDto> {
     const inventory = await this.inventoryModel.findById(id);
+    if (!inventory) throw new NotFoundException('Inventory does not exist');
     return plainToClass(ReadInventoryDto, inventory);
   }
 
@@ -38,11 +39,15 @@ export class ProductService {
       { $set: req },
       { new: true },
     );
+    if (!updatedInventory)
+      throw new NotFoundException('Inventory does not exist');
     return plainToClass(ReadInventoryDto, updatedInventory);
   }
 
   async deleteinventory(id: string) {
     const deletedInvnetory = await this.inventoryModel.findByIdAndDelete(id);
+    if (!deletedInvnetory)
+      throw new NotFoundException('Inventory does not exist');
     return plainToClass(ReadInventoryDto, deletedInvnetory);
   }
 }
