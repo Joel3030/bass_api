@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Inventory, InventoryDocument } from './schemas';
 import { plainToClass } from 'class-transformer';
-import { UpdateInventoryDto } from './dtos/update-inventory.dto';
 import {
   CreateInventoryDto,
   ReadInventoryDto,
