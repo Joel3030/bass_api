@@ -3,38 +3,39 @@ import {
   IsBoolean,
   IsDate,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
 } from 'class-validator';
 import { Employee } from 'src/employee/schemas/employee.schema';
 
 export class UpdateUserDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MaxLength(25, { message: 'username is too long' })
   username: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   password: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   employee: Employee;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsArray()
   roles: string[];
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   status: boolean;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDate()
   create_at: Date;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDate()
   update_at: Date;
 }

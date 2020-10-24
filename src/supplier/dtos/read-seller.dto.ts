@@ -1,6 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import { ReadCompanyDto } from './';
-import { Company } from '../schemas/company.schema';
+import { Company } from '../schemas';
 
 @Exclude()
 export class ReadSellerDto {

@@ -42,7 +42,7 @@ export class SupplierService {
   ): Promise<ReadCompanyDto> {
     const updatedCompany: Company = await this.companyModel.findByIdAndUpdate(
       id,
-      { $set: req },
+      req,
       { new: true },
     );
     if (!updatedCompany) throw new NotFoundException('Company does not exist');
@@ -77,7 +77,7 @@ export class SupplierService {
   async updateSeller(id: string, req: UpdateSellerDto): Promise<ReadSellerDto> {
     const updatedSeller: Seller = await this.sellerModel.findByIdAndUpdate(
       id,
-      { $set: req },
+      req,
       { new: true },
     );
     if (!updatedSeller) throw new NotFoundException('Seller does not exist');

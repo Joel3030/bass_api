@@ -1,11 +1,11 @@
 import { Type } from 'class-transformer';
 import { ReadCompanyDto } from './';
 import { Company } from '../schemas';
+
 import {
   IsBoolean,
   IsDate,
   IsEmail,
-  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -15,19 +15,22 @@ import {
 } from 'class-validator';
 
 export class UpdateSellerDto {
+  @IsOptional()
   @ValidateNested()
   @Type(() => Fullname)
   fullname: Fullname[];
 
+  @IsOptional()
   @ValidateNested()
   @Type(() => Contacts)
   contacts: Contacts[];
 
+  @IsOptional()
   @ValidateNested()
   @Type(() => Location)
   location: Location[];
 
-  @IsNotEmpty()
+  @IsOptional()
   company: Company;
 
   @IsOptional()
