@@ -1,7 +1,6 @@
-import { Type } from 'class-transformer';
-import { IsNotEmpty, IsString, isNotEmpty } from 'class-validator';
-import { Category, Inventory } from '../schemas';
-import { ReadCategoryDto } from './read-category.dto';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Seller } from '../../supplier/schemas';
+import { Inventory } from '../../inventory/schemas/inventory.schema';
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -10,6 +9,25 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   @IsString()
-  @Type(() => Category)
-  category: Category[];
+  category: string[];
+
+  @IsNotEmpty()
+  @IsString()
+  inventory: Inventory;
+
+  @IsNotEmpty()
+  @IsString()
+  supplier: Seller;
+
+  @IsOptional()
+  @IsString()
+  imaga_path: String;
+
+  @IsOptional()
+  @IsBoolean()
+  status: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  service: boolean;
 }

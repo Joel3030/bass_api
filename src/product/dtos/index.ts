@@ -1,3 +1,3 @@
-export * from './create-inventory.dto';
-export * from './update-inventory.dto';
-export * from './read-inventory.dto';
+export * from './create-product.dto';
+export * from './update-product.dto';
+export * from './read-product.dto';
