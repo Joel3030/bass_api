@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as s } from 'mongoose';
 import { Inventory } from '../../inventory/schemas/inventory.schema';
 import { Seller } from '../../supplier/schemas/seller.schema';
@@ -37,3 +37,5 @@ export class Product {
   @Prop({ default: Date.now })
   update_at: Date;
 }
+
+export const ProductSchema = SchemaFactory.createForClass(Product);
