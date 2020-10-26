@@ -1,30 +1,27 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as s } from 'mongoose';
-import { Employee } from 'src/employee/schemas/employee.schema';
+import { Document, Schema as schema } from 'mongoose';
+import { Employee } from '../../employee/schemas/employee.schema';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop({})
+  @Prop()
   username: string;
 
   @Prop()
   password: string;
 
   @Prop({
-    type: s.Types.ObjectId,
+    type: schema.Types.ObjectId,
     ref: Employee.name,
-    required: true,
   })
   employee: Employee;
 
   @Prop([String])
   roles: string[];
 
-  @Prop({
-    default: true,
-  })
+  @Prop()
   status: boolean;
 
   @Prop({ default: Date.now })

@@ -1,5 +1,4 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { Employee } from '../../employee/schemas/employee.schema';
 import { ReadEmployeeDto } from '../../employee/dtos/read-employee.dto';
 
 @Exclude()
@@ -14,7 +13,7 @@ export class ReadUserDto {
 
   @Expose()
   @Type(() => ReadEmployeeDto)
-  employee: Employee[];
+  employee: ReadEmployeeDto[];
 
   @Expose()
   roles: string[];

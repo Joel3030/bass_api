@@ -15,12 +15,12 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async getUsers(): Promise<ReadUserDto[]> {
-    const users = await this.userModel.find().populate('employee');
+    const users: User[] = await this.userModel.find().populate('employee');
     return plainToClass(ReadUserDto, users);
   }
 
   async getUser(id: string): Promise<ReadUserDto> {
-    const user = await this.userModel.findById(id).populate('employee');
+    const user: User = await this.userModel.findById(id).populate('employee');
     if (!user) throw new NotFoundException('User does not exist');
     return plainToClass(ReadUserDto, user);
   }
@@ -40,7 +40,7 @@ export class UserService {
   async updateUser(id: string, req: UpdateUserDto): Promise<ReadUserDto> {
     if (req.password) req.password = await hash(req.password, 10);
 
-    const updatedUser = await this.userModel.findByIdAndUpdate(id, req, {
+    const updatedUser: User = await this.userModel.findByIdAndUpdate(id, req, {
       new: true,
     });
     if (!updatedUser) throw new NotFoundException('User does not exist');
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   async deleteUser(id: string): Promise<ReadUserDto> {
-    const deletedUser = await this.userModel.findByIdAndDelete(id);
+    const deletedUser: User = await this.userModel.findByIdAndDelete(id);
     if (!deletedUser) throw new NotFoundException('User does not exist');
     return plainToClass(ReadUserDto, deletedUser);
   }

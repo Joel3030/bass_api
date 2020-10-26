@@ -12,8 +12,8 @@ import {
 import { Response } from 'express';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dtos';
-import { Auth } from 'src/common/decorators';
-import { AppResource } from 'src/app.roles';
+import { Auth } from '../common/decorators';
+import { AppResource } from '../app.roles';
 
 @Controller('user')
 export class UserController {
@@ -90,6 +90,6 @@ export class UserController {
     const deletedUser = await this.userService.deleteUser(id);
     return res
       .status(HttpStatus.OK)
-      .json({ message: 'User Deleted Successfully ', deletedUser });
+      .json({ message: 'User Deleted Successfully', deletedUser });
   }
 }

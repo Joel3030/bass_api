@@ -2,16 +2,17 @@ import {
   IsArray,
   IsBoolean,
   IsDate,
-  IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
+  MinLength,
 } from 'class-validator';
-import { Employee } from 'src/employee/schemas/employee.schema';
+import { Employee } from '../../employee/schemas/employee.schema';
 
 export class UpdateUserDto {
   @IsOptional()
   @IsString()
+  @MinLength(3, { message: 'the username is too short' })
   @MaxLength(25, { message: 'username is too long' })
   username: string;
 
@@ -30,10 +31,6 @@ export class UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   status: boolean;
-
-  @IsOptional()
-  @IsDate()
-  create_at: Date;
 
   @IsOptional()
   @IsDate()

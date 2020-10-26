@@ -1,6 +1,6 @@
-import { Type } from 'class-transformer';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsString,
   MaxLength,
@@ -11,6 +11,7 @@ import { Employee } from '../../employee/schemas/employee.schema';
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
+  @MinLength(3, { message: 'the username is too short' })
   @MaxLength(25, { message: 'the username is too long' })
   username: string;
 
@@ -26,4 +27,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsArray()
   roles: string[];
+
+  @IsNotEmpty()
+  @IsBoolean()
+  status: Boolean;
 }
