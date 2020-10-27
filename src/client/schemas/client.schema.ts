@@ -35,7 +35,7 @@ export class Client {
   )
   location: Record<string, any>;
 
-  @Prop({ default: true })
+  @Prop()
   status: boolean;
 
   @Prop({ default: Date.now })

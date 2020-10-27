@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateClientDto, ReadClientDto } from './dtos';
+import { CreateClientDto, ReadClientDto, UpdateClientDto } from './dtos';
 import { Client, ClientDocument } from './schemas/client.schema';
 import { plainToClass } from 'class-transformer';
 
@@ -28,7 +28,7 @@ export class ClientService {
     return plainToClass(ReadClientDto, client);
   }
 
-  async updateClient(id: string, req: CreateClientDto): Promise<ReadClientDto> {
+  async updateClient(id: string, req: UpdateClientDto): Promise<ReadClientDto> {
     const updatedClient: Client = await this.clientModel.findByIdAndUpdate(
       id,
       { $set: req },

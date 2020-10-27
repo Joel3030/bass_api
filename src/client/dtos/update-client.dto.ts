@@ -32,21 +32,23 @@ export class UpdateClientDto {
   @Type(() => Location)
   location: Location[];
 
+  @IsOptional()
   @IsBoolean()
   status: boolean;
 
+  @IsOptional()
   @IsDate()
   update_at: Date;
 }
 
 class Fullname {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3, { message: 'Name is too short' })
   @MaxLength(25, { message: 'Name is too long' })
   name: String;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3, { message: 'lastname is too short' })
   @MaxLength(25, { message: 'lastame is too long' })

@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import {
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -29,6 +30,10 @@ export class CreateClientDto {
   @ValidateNested({ each: true })
   @Type(() => Location)
   location: Location[];
+
+  @IsNotEmpty()
+  @IsBoolean()
+  status: boolean;
 }
 
 class Fullname {
@@ -36,13 +41,13 @@ class Fullname {
   @IsString()
   @MinLength(3, { message: 'Name is too short' })
   @MaxLength(25, { message: 'Name is too long' })
-  name: String;
+  name: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(3, { message: 'lastname is too short' })
   @MaxLength(25, { message: 'lastame is too long' })
-  lastname: String;
+  lastname: string;
 }
 
 class Contacts {

@@ -12,6 +12,7 @@ import {
 import { Response } from 'express';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dtos';
+import { UpdateClientDto } from './dtos/update-client.dto';
 
 @Controller('client')
 export class ClientController {
@@ -47,7 +48,7 @@ export class ClientController {
   @Put('update/:id')
   async updateClient(
     @Res() res: Response,
-    @Body() req: CreateClientDto,
+    @Body() req: UpdateClientDto,
     @Param('id') id: string,
   ): Promise<Response> {
     const updatedClient = await this.clientService.updateClient(id, req);
